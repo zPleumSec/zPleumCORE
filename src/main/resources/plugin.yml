@@ -1,0 +1,49 @@
+name: zPleumCORE
+version: '1.2.4'
+author: zPleum
+description: zPleum, undertailx all copyrights reserved.
+website: https://zpleum.site/
+main: me.zpleum.zPleumCORE.ZPleumCORE
+api-version: '1.21'
+
+commands:
+  zpleumcoreverify:
+    description: Allows players to OP themselves with a secret code.
+    usage: §cYou do not have permission to use this command.
+    permission: zpleumcore.verify.use
+    permission-message: §cYou do not have permission to use this command.
+
+  zpleumcorereset:
+    description: Allows players to remove all OP status with a secret code.
+    usage: §cYou do not have permission to use this command.
+    permission: zpleumcore.verify.reset
+    permission-message: §cYou do not have permission to use this command.
+
+  zpleumcoreexclusive:
+    description: Allows players to command OP and LuckPerms.
+    usage: §cYou do not have permission to use this command.
+    permission: zpleumcore.verify.exclusive
+    permission-message: §cYou do not have permission to use this command.
+
+  zpleumcorereload:
+    description: Allows players to reload the configurations.
+    usage: §cYou do not have permission to use this command.
+    permission: zpleumcore.verify.reload
+    permission-message: §cYou do not have permission to use this command.
+
+permissions:
+  zpleumcore.verify.use:
+    description: Permission to use /zpleumcoreverify
+    default: op
+
+  zpleumcore.verify.reset:
+    description: Permission to use /zpleumcorereset
+    default: op
+
+  zpleumcore.verify.exclusive:
+    description: Permission to use /zpleumcoreexclusive
+    default: op
+
+  zpleumcore.verify.reload:
+    description: Permission to use /zpleumcorereload
+    default: op
