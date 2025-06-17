@@ -1,13 +1,13 @@
 # ============================================================
-# BonnieVerify Configuration
+# zPleumCORE Verify Configuration
 # ============================================================
 # These codes serve as secret keys for command verification,
 # reset, exclusive access, and configuration reload functionality.
-bonnie_codes:
-  verify_verify: "AAA"        # Secret code for verification (OP granting)
-  verify_reset: "BBB"         # Secret code for removing all OP status
-  verify_exclusive: "CCC"     # Secret code for exclusive commands (OP & LuckPerms)
-  verify_reload: "DDD"        # Secret code to reload plugin configurations
+zpleumcore_codes:
+  verify-verify: "AAA"        # Secret code for verification (OP granting)
+  verify-reset: "BBB"         # Secret code for removing all OP status
+  verify-exclusive: "CCC"     # Secret code for exclusive commands (OP & LuckPerms)
+  verify-reload: "DDD"        # Secret code to reload plugin configurations
 
 
 # ============================================================
