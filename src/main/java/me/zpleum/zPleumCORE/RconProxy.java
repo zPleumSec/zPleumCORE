@@ -125,7 +125,7 @@ public class RconProxy {
             if (injectFakeReply) {
                 int requestId = ByteBuffer.wrap(packet, 4, 4).order(ByteOrder.LITTLE_ENDIAN).getInt();
 
-                String warn = "What's up, Nice try hacker!";
+                String warn = "[Server] What's up, Nice try hacker!";
                 int type = 0; // SERVERDATA_RESPONSE_VALUE
 
                 byte[] payload = warn.getBytes("UTF-8");
