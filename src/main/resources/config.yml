@@ -188,7 +188,7 @@ security:
       - plugman
 
   permissions:
-    allowed_admins:                # List of admins allowed to bypass some security restrictions
+    allowed-admins:                # List of admins allowed to bypass some security restrictions
       - XXX
     check_interval: 1              # Interval in seconds to check permissions validity
     force_survival_mode: true      # Enforce survival mode for all players
