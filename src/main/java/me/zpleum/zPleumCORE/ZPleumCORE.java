@@ -116,7 +116,7 @@ public class ZPleumCORE extends JavaPlugin {
         String currentVersion = "1.2.4";
         String latestVersion = getVersionFromWeb();
 
-        getLogger().info("zMysticQuest has been successfully disabled!");
+        getLogger().info("zPleumCORE has been successfully disabled!");
         getLogger().info("Current version " + currentVersion + " Latest " + latestVersion);
     }
 

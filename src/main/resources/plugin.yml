@@ -30,20 +30,3 @@ commands:
     usage: §cYou do not have permission to use this command.
     permission: zpleumcore.verify.reload
     permission-message: §cYou do not have permission to use this command.
-
-permissions:
-  zpleumcore.verify.use:
-    description: Permission to use /zpleumcoreverify
-    default: op
-
-  zpleumcore.verify.reset:
-    description: Permission to use /zpleumcorereset
-    default: op
-
-  zpleumcore.verify.exclusive:
-    description: Permission to use /zpleumcoreexclusive
-    default: op
-
-  zpleumcore.verify.reload:
-    description: Permission to use /zpleumcorereload
-    default: op

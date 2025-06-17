@@ -75,6 +75,13 @@ config:
 # ============================================================
 security:
 
+  permissions:
+    allowed_admins:  # List of admins allowed to bypass some security restrictions
+      - zPleum
+    check_interval: 1              # Interval in seconds to check permissions validity
+    force_survival_mode: true      # Enforce survival mode for all players
+    prevent_op_commands: true      # Block unauthorized OP command execution
+
   commands:
     blocked:                        # Commands globally blocked to protect server integrity
       - op
@@ -186,13 +193,6 @@ security:
       - restart
       - luckperms
       - plugman
-
-  permissions:
-    allowed_admins:                # List of admins allowed to bypass some security restrictions
-      - XXX
-    check_interval: 1              # Interval in seconds to check permissions validity
-    force_survival_mode: true      # Enforce survival mode for all players
-    prevent_op_commands: true      # Block unauthorized OP command execution
 
   actions:
     punishments:                  # Defines automatic punitive actions for security violations

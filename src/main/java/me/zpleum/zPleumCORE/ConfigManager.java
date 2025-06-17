@@ -91,13 +91,8 @@ public class ConfigManager {
         return new ArrayList<String>() {{
             add("Plugmanx");
             add("Plugman");
-            add("SecurityX");
-            add("Skript");
-            add("CMI");
-            add("CMILib");
             add("ProtocolLib");
             add("zPleumCORE");
-            add("zPleumAUTH");
         }};
     }
 
