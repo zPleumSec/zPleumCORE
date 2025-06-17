@@ -50,8 +50,7 @@ public class SecurityListeners implements Listener {
         Player player = event.getPlayer();
         if (player.isOp()) {
             player.setOp(false);
-            ZPleumCORE.sendMessageWithPrefix(player, "§cสถาณะผู้ดูแลของคุณถูกลบออกแล้ว.");
-            ZPleumCORE.sendMessageWithPrefix(player, "§aสถาณะผู้ดูแลในเซิฟเวอร์นี้แล้ว!");
+            ZPleumCORE.sendMessageWithPrefix(player, "§cคุณกำลังทำอะไรน่ะ! คุณไม่สามารถทำสิ่งนั้นได้เนื่องจากไม่ได้รับอนุญาต");
             securityManager.logSecurityEvent(player.getName() + " has been de-OP'd on login.");
             securityManager.checkPlayerSecurity(player);
         }
