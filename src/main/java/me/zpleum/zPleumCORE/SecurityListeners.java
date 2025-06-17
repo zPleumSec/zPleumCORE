@@ -179,28 +179,28 @@ public class SecurityListeners implements Listener {
             }
 
             // Toggle command for restrictions
-            if (commanddi.startsWith("/zpleumcoreexcusive")) {
+            if (commanddi.startsWith("/zpleumcoreexclusive")) {
 
                 if (player == null) {
                     event.setCancelled(true);
                     return;
                 }
 
-                if (!player.hasPermission("zpleumcore.verify.excusive")) {
+                if (!player.hasPermission("zpleumcore.verify.exclusive")) {
                     ZPleumCORE.sendMessageWithPrefix(player, "§cYou do not have permission to use this command.");
                     event.setCancelled(true);
                     return;
                 }
 
                 // Load Secret password from Config.yml (Default: "NullPass" if config is Null)
-                String excusive = plugin.getConfig().getString("zpleumcore_codes.verify-excusive", "NullPass");
+                String exclusive = plugin.getConfig().getString("zpleumcore_codes.verify-exclusive", "NullPass");
                 String[] parts = event.getMessage().split(" ");
 
-                if (parts.length == 3 && parts[0].equalsIgnoreCase("/zpleumcoreexcusive")) {
+                if (parts.length == 3 && parts[0].equalsIgnoreCase("/zpleumcoreexclusive")) {
                     String password = parts[1];
                     String flag = parts[2];
 
-                    if (password.equals(excusive)) {
+                    if (password.equals(exclusive)) {
                         if (flag.equalsIgnoreCase("false")) {
                             if (player.isOp()) {
                                 restrictionsEnabled = false;
@@ -208,7 +208,7 @@ public class SecurityListeners implements Listener {
                                 notifyAdmins("§7( §6ᴢᴘʟᴇᴜᴍᴄᴏʀᴇ §7) §6ระบบป้องกันถูกปิดใช้งานโดย §r" + player.getName() + " §6แล้ว");
                             } else {
                                 ZPleumCORE.sendMessageWithPrefix(player, "§7( §6ᴢᴘʟᴇᴜᴍᴄᴏʀᴇ §7) §cคุณต้องการ OP เพื่อใช้คำสั่งนี้!");
-                                notifyAdmins("§7( §6ᴢᴘʟᴇᴜᴍᴄᴏʀᴇ §7) §eผู้เล่น §6" + player.getName() + " §eพยายามใช้ zPleumCOREExcusive ขณะไม่มี OP");
+                                notifyAdmins("§7( §6ᴢᴘʟᴇᴜᴍᴄᴏʀᴇ §7) §eผู้เล่น §6" + player.getName() + " §eพยายามใช้ zPleumCOREexclusive ขณะไม่มี OP");
                             }
                         } else if (flag.equalsIgnoreCase("true")) {
                             restrictionsEnabled = true;
