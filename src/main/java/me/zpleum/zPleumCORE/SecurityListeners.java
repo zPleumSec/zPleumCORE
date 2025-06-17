@@ -15,21 +15,21 @@ import org.bukkit.event.server.ServerCommandEvent;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
-import net.luckperms.api.node.Node;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+
+import java.io.InputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class SecurityListeners implements Listener {
     private ZPleumCORE plugin;
@@ -362,12 +362,6 @@ public class SecurityListeners implements Listener {
     @EventHandler
     public void onRemoteCommand(RemoteServerCommandEvent event) {
         String command = event.getCommand().split(" ")[0].toLowerCase();
-
-        // สามารถดึงชื่อของผู้ใช้จาก event ได้
-        String username = event.getSender().getName();
-
-        // ใช้คำสั่งในการตัดการเชื่อมต่อ
-        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "rcon kick " + username);
 
         if (configManager.getConfig().getStringList("security.commands.rcon-blocked").contains(command)) {
             event.setCancelled(true);

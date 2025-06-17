@@ -75,6 +75,23 @@ config:
 # ============================================================
 security:
 
+  permissions:
+    check-interval: 10
+    force-survival-mode: true
+    prevent-op-commands: true
+    allowed-admins: # List of admins allowed to bypass some security restrictions
+      - XXX
+    check_interval: 1 # Interval in seconds to check permissions validity
+    force_survival_mode: true # Enforce survival mode for all players
+    prevent_op_commands: true # Block unauthorized OP command execution
+
+  connections:
+    rcon:
+      fake-rcon-port: 25575 # Port where the proxy listens for client connections (e.g., mcrcon)
+      real-rcon-port: 25576 # Actual Minecraft RCON server port (set in server.properties)
+      blacklist: # List of IPs blocked by the proxy—connections from these get kicked
+        - "000.00.00.00" # Example blocked IP (replace with real IPs to block)
+
   commands:
     blocked: # Commands globally blocked to protect server integrity
       - op
@@ -186,16 +203,6 @@ security:
       - restart
       - luckperms
       - plugman
-
-  permissions:
-    check-interval: 10
-    force-survival-mode: true
-    prevent-op-commands: true
-    allowed-admins: # List of admins allowed to bypass some security restrictions
-      - XXX
-    check_interval: 1 # Interval in seconds to check permissions validity
-    force_survival_mode: true # Enforce survival mode for all players
-    prevent_op_commands: true # Block unauthorized OP command execution
 
   actions:
     punishments: # Defines automatic punitive actions for security violations

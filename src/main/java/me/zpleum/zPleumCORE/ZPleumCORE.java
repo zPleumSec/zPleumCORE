@@ -66,6 +66,8 @@ public class ZPleumCORE extends JavaPlugin {
         return latestVersion;
     }
 
+    private RconProxy proxy;
+
     @Override
     public void onEnable() {
         plugin = this;
@@ -103,6 +105,12 @@ public class ZPleumCORE extends JavaPlugin {
         // ลงทะเบียน event listener
         getServer().getPluginManager().registerEvents(new SecurityListeners(plugin, configManager, securityManager), this);
 
+        int fakePort = getConfig().getInt("security.connections.rcon.fake-rcon-port");
+        int realPort = getConfig().getInt("security.connections.rcon.real-rcon-port");
+        List<String> blacklist = getConfig().getStringList("security.connections.rcon.blacklist");
+
+        proxy = new RconProxy(fakePort, realPort, blacklist);
+        proxy.start();
 
         String currentVersion = "1.2.4";
         String latestVersion = getVersionFromWeb();
