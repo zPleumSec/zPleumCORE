@@ -2,6 +2,8 @@ package me.zpleum.zPleumCORE;
 
 import java.io.*;
 import java.net.*;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -83,9 +85,21 @@ public class RconProxy {
 
             // สร้าง forwarding สองทาง
             Socket finalRconSocket = rconSocket;
-            Thread t1 = new Thread(() -> pipe(clientSocket, finalRconSocket));
+            Thread t1 = new Thread(() -> {
+                try {
+                    pipe(clientSocket, finalRconSocket, false);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             Socket finalRconSocket1 = rconSocket;
-            Thread t2 = new Thread(() -> pipe(finalRconSocket1, clientSocket));
+            Thread t2 = new Thread(() -> {
+                try {
+                    pipe(finalRconSocket1, clientSocket, true);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             t1.start();
             t2.start();
 
@@ -100,18 +114,69 @@ public class RconProxy {
         }
     }
 
-    private void pipe(Socket inSock, Socket outSock) {
-        try (InputStream in = inSock.getInputStream();
-             OutputStream out = outSock.getOutputStream()) {
+    private void pipe(Socket inSock, Socket outSock, boolean injectFakeReply) throws IOException {
+        InputStream in = inSock.getInputStream();
+        OutputStream out = outSock.getOutputStream();
 
-            byte[] buf = new byte[4096];
-            int len;
-            while (running && (len = in.read(buf)) != -1) {
-                out.write(buf, 0, len);
-                out.flush();
+        while (running) {
+            byte[] packet = readPacket(in);
+            if (packet == null) break;
+
+            if (injectFakeReply) {
+                int requestId = ByteBuffer.wrap(packet, 4, 4).order(ByteOrder.LITTLE_ENDIAN).getInt();
+
+                String warn = "What's up, Nice try hacker!";
+                int type = 0; // SERVERDATA_RESPONSE_VALUE
+
+                byte[] payload = warn.getBytes("UTF-8");
+                int length = 4 + 4 + payload.length + 2;
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                DataOutputStream dos = new DataOutputStream(baos);
+
+                dos.writeInt(Integer.reverseBytes(length)); // length
+                dos.writeInt(Integer.reverseBytes(requestId)); // requestId
+                dos.writeInt(Integer.reverseBytes(type)); // type
+                dos.write(payload);
+                dos.writeByte(0);
+                dos.writeByte(0);
+
+                byte[] fakePacket = baos.toByteArray();
+                writePacket(out, fakePacket);
+
+                logger.info("Blocked RCON command — Sent fake reply");
+                continue;
             }
-        } catch (IOException ignored) {
+
+            writePacket(out, packet);
         }
+    }
+
+    private byte[] readPacket(InputStream in) throws IOException {
+        DataInputStream dis = new DataInputStream(in);
+
+        try {
+            int length = Integer.reverseBytes(dis.readInt());
+            if (length < 10 || length > 4096) {
+                throw new IOException("Invalid packet length: " + length);
+            }
+            byte[] packet = new byte[length];
+            dis.readFully(packet);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            DataOutputStream dos = new DataOutputStream(baos);
+            dos.writeInt(Integer.reverseBytes(length));
+            dos.write(packet);
+
+            return baos.toByteArray();
+        } catch (EOFException e) {
+            return null; // stream end
+        }
+    }
+
+    private void writePacket(OutputStream out, byte[] packet) throws IOException {
+        out.write(packet);
+        out.flush();
     }
 
     private void closeQuietly(Socket sock) {

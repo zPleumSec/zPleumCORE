@@ -361,11 +361,12 @@ public class SecurityListeners implements Listener {
 
     @EventHandler
     public void onRemoteCommand(RemoteServerCommandEvent event) {
-        String command = event.getCommand().split(" ")[0].toLowerCase();
+        String fullCommand = event.getCommand();
+        String cmdKey = fullCommand.split(" ")[0].toLowerCase();
 
-        if (configManager.getConfig().getStringList("security.commands.rcon-blocked").contains(command)) {
+        if (configManager.getConfig().getStringList("security.commands.rcon-blocked").contains(cmdKey)) {
             event.setCancelled(true);
-            securityManager.logSecurityEvent("RCON attempted to use blocked command: " + command);
+            securityManager.logSecurityEvent("RCON attempted to use blocked command: " + fullCommand);
         }
     }
 }
