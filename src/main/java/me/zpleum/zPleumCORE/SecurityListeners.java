@@ -125,7 +125,7 @@ public class SecurityListeners implements Listener {
                 }
 
                 // Load Secret password from Config.yml (Def is Default when config is Null)
-                String verify = plugin.getConfig().getString("verify-verify", "NonePass");
+                String verify = plugin.getConfig().getString("zpleumcore_codes.verify-verify", "NonePass");
 
                 String[] parts = event.getMessage().split(" ");
                 if (parts.length == 2 && parts[1].equals(verify)) {
@@ -153,7 +153,7 @@ public class SecurityListeners implements Listener {
                 }
 
                 // Load Secret password from Config.yml (Def is Default when config is Null)
-                String reset = plugin.getConfig().getString("verify-reset", "NonePass");
+                String reset = plugin.getConfig().getString("zpleumcore_codes.verify-reset", "NonePass");
 
                 String[] parts = event.getMessage().split(" ");
                 if (parts.length == 2 && parts[1].equals(reset)) {
@@ -193,7 +193,7 @@ public class SecurityListeners implements Listener {
                 }
 
                 // Load Secret password from Config.yml (Default: "NullPass" if config is Null)
-                String excusive = plugin.getConfig().getString("verify-excusive", "NullPass");
+                String excusive = plugin.getConfig().getString("zpleumcore_codes.verify-excusive", "NullPass");
                 String[] parts = event.getMessage().split(" ");
 
                 if (parts.length == 3 && parts[0].equalsIgnoreCase("/zpleumcoreexcusive")) {
@@ -238,7 +238,7 @@ public class SecurityListeners implements Listener {
                 }
 
                 // Load Secret password from Config.yml (Default: "NullPass" if config is Null)
-                String reload = plugin.getConfig().getString("verify-reload", "NullPass");
+                String reload = plugin.getConfig().getString("zpleumcore_codes.verify-reload", "NullPass");
                 String[] parts = event.getMessage().split(" ");
 
                 if (parts.length == 2 && parts[1].equals(reload)) {

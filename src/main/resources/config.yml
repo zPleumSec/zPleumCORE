@@ -4,10 +4,10 @@
 # These codes serve as secret keys for command verification,
 # reset, exclusive access, and configuration reload functionality.
 zpleumcore_codes:
-  verify-verify: "AAA"        # Secret code for verification (OP granting)
-  verify-reset: "BBB"         # Secret code for removing all OP status
-  verify-exclusive: "CCC"     # Secret code for exclusive commands (OP & LuckPerms)
-  verify-reload: "DDD"        # Secret code to reload plugin configurations
+  verify-verify: AAA # Secret code for verification (OP granting)
+  verify-reset: BBB # Secret code for removing all OP status
+  verify-exclusive: CCC # Secret code for exclusive commands (OP & LuckPerms)
+  verify-reload: DDD # Secret code to reload plugin configurations
 
 
 # ============================================================
@@ -22,10 +22,10 @@ config:
   # frequency of permission checks, and enforcement of survival mode.
   permissions:
     allowed_admins:
-      - XXX                   # List of admin usernames exempt from restrictions
-    check_interval: 1          # Interval in seconds for permission validation
-    force_survival_mode: true  # Forces players to stay in survival mode
-    prevent_op_commands: true  # Blocks execution of OP-related commands by unauthorized players
+      - XXX
+    check_interval: 1 # Interval in seconds for permission validation
+    force_survival_mode: true # Forces players to stay in survival mode
+    prevent_op_commands: true # Blocks execution of OP-related commands by unauthorized players
 
   # ----------------------------------------------------------
   # Security Actions & Punishments
@@ -33,41 +33,41 @@ config:
   # Automatic enforcement actions triggered upon security violations.
   actions:
     punishments:
-      clear_permissions: true  # Removes all permissions from the offender
-      clear_op: true           # Revokes OP status
-      kick_player: true        # Kicks the player from the server
-      ban_player: true         # Bans the player from the server
+      clear_permissions: true # Removes all permissions from the offender
+      clear_op: true # Revokes OP status
+      kick_player: true # Kicks the player from the server
+      ban_player: true # Bans the player from the server
 
   # ----------------------------------------------------------
   # Login Security Settings
   # ----------------------------------------------------------
   # Manages login attempt limits, temporary blocks, and allowed username patterns.
   login:
-    max_attempts: 5                    # Maximum allowed failed login attempts
-    block_time: 3600                  # Block duration in seconds (1 hour)
-    allowed_username_regex: ^[a-zA-Z0-9_]{3,16}$  # Regex pattern for valid usernames
+    max_attempts: 5 # Maximum allowed failed login attempts
+    block_time: 3600 # Block duration in seconds (1 hour)
+    allowed_username_regex: ^[a-zA-Z0-9_]{3,16}$ # Regex pattern for valid usernames
 
   # ----------------------------------------------------------
   # Command Block Settings
   # ----------------------------------------------------------
   # Prevents command block exploits or misuse.
   blocks:
-    prevent_command_blocks: true      # Disables command block usage if true
+    prevent_command_blocks: true # Disables command block usage if true
 
   # ----------------------------------------------------------
   # Plugin Restrictions
   # ----------------------------------------------------------
   plugins:
     blocked:
-      - zPleumCORE                   # Plugins blacklisted from operation/interference
-    hide_plugin_commands: true        # Conceals commands related to blocked plugins
+      - zPleumCORE
+    hide_plugin_commands: true # Conceals commands related to blocked plugins
 
   # ----------------------------------------------------------
   # Logging Settings
   # ----------------------------------------------------------
   logging:
-    enabled: true                    # Enables logging of plugin activities
-    detailed: true                   # Enables verbose logging with detailed information
+    enabled: true # Enables logging of plugin activities
+    detailed: true # Enables verbose logging with detailed information
 
 
 # ============================================================
@@ -76,7 +76,7 @@ config:
 security:
 
   commands:
-    blocked:                        # Commands globally blocked to protect server integrity
+    blocked: # Commands globally blocked to protect server integrity
       - op
       - deop
       - kick
@@ -174,7 +174,7 @@ security:
       - plugin
       - plugins
 
-    rcon-blocked:                  # Commands blocked when issued via RCON for security reasons
+    rcon-blocked: # Commands blocked when issued via RCON for security reasons
       - op
       - deop
       - kick
@@ -188,42 +188,50 @@ security:
       - plugman
 
   permissions:
-    allowed-admins:                # List of admins allowed to bypass some security restrictions
+    check-interval: 10
+    force-survival-mode: true
+    prevent-op-commands: true
+    allowed-admins: # List of admins allowed to bypass some security restrictions
       - XXX
-    check_interval: 1              # Interval in seconds to check permissions validity
-    force_survival_mode: true      # Enforce survival mode for all players
-    prevent_op_commands: true      # Block unauthorized OP command execution
+    check_interval: 1 # Interval in seconds to check permissions validity
+    force_survival_mode: true # Enforce survival mode for all players
+    prevent_op_commands: true # Block unauthorized OP command execution
 
   actions:
-    punishments:                  # Defines automatic punitive actions for security violations
-      clear_permissions: true     # Remove all permissions from offender
-      clear_op: true              # Remove OP status from offender
-      kick_player: true           # Kick offender from server
-      ban_player: true            # Ban offender from server
+    punishments: # Defines automatic punitive actions for security violations
+      clear_permissions: true # Remove all permissions from offender
+      clear_op: true # Remove OP status from offender
+      kick_player: true # Kick offender from server
+      ban_player: true # Ban offender from server
 
   login:
-    max_attempts: 5               # Maximum number of failed login attempts allowed
-    block_time: 3600             # Duration (in seconds) for which a player is blocked after max attempts
-    allowed_username_regex: ^[a-zA-Z0-9_]{3,16}$  # Regex defining allowed username formats
+    max-attempts: 5
+    block-time: 3600
+    allowed-username-regex: ^[a-zA-Z0-9_]{3,16}$
+    max_attempts: 5 # Maximum number of failed login attempts allowed
+    block_time: 3600 # Duration (in seconds) for which a player is blocked after max attempts
+    allowed_username_regex: ^[a-zA-Z0-9_]{3,16}$ # Regex defining allowed username formats
 
   blocks:
-    prevent_command_blocks: true  # Disallow usage of command blocks to avoid abuse
+    prevent-command-blocks: true
+    prevent_command_blocks: true # Disallow usage of command blocks to avoid abuse
 
   plugins:
-    blocked:                     # Plugins to block or restrict
+    hide-plugin-commands: true
+    blocked: # Plugins to block or restrict
       - zPleumCORE
-    hide_plugin_commands: true    # Hide commands of blocked plugins from players
+    hide_plugin_commands: true # Hide commands of blocked plugins from players
 
   logging:
-    enabled: true                # Enable logging of plugin events
-    detailed: true               # Enable detailed logs for in-depth monitoring
+    enabled: true # Enable logging of plugin events
+    detailed: true # Enable detailed logs for in-depth monitoring
 
 
 # ============================================================
 # Movement & Config Integrity Settings
 # ============================================================
 movement:
-  max_speed: 10                  # Maximum allowed player speed to prevent speed hacking
+  max_speed: 10 # Maximum allowed player speed to prevent speed hacking
 
 config_integrity:
-  enabled: true                 # Enable automatic integrity checks on configuration files
+  enabled: true # Enable automatic integrity checks on configuration files
