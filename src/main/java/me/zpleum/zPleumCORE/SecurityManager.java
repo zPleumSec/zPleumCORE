@@ -113,7 +113,6 @@ public class SecurityManager {
         List<String> allowedAdmins = configManager.getConfig()
                 .getStringList("security.permissions.allowed-admins")
                 .stream()
-                .map(String::toLowerCase)
                 .collect(Collectors.toList());
 
         if (allowedAdmins == null || allowedAdmins.isEmpty()) {
@@ -132,7 +131,7 @@ public class SecurityManager {
                 "minecraft.command.reload"
         );
 
-        if (!allowedAdmins.contains(player.getName().toLowerCase())) {
+        if ((!allowedAdmins.contains(player.getName()))) {
             User user = luckPerms.getUserManager().getUser(player.getUniqueId());
             if (user != null) {
                 boolean hasRestrictedPerm = false;
